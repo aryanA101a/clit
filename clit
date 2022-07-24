@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Illegal number of parameters"
+    exit 0
+fi
+
+file=$RANDOM
+
+case $1 in
+
+c) xclip -o -sel clip | gcc -o /tmp/$file -xc - && /tmp/$file ;; 
+
+cpp) xclip -o -sel clip | g++ -o /tmp/$file -x c++ - && /tmp/$file ;;
+
+-h | --help) printf "clit is a bash script to help you run your copied code instantly from terminal.\n\nsyntax: clit [language]\n\nCurrently Supported: c and cpp\n\neg: clit c\n" ;;
+
+*) echo "Not Supported" ;;
+
+esac
+
+if [ $? == 1 ]
+then
+echo "Copy Valid Code"
+fi
